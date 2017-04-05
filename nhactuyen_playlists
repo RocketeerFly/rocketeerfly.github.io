@@ -1,0 +1,12 @@
+{
+  "playlists": [
+    {
+      "playlist_title": "Tuyển chọn nhạc Acousstic",
+      "playlist_id": 1
+    },
+    {
+      "playlist_title": "Nhạc vàng",
+      "playlist_id": 2
+    }
+  ]
+}
