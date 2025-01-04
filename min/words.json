@@ -23,6 +23,10 @@
         { "word": "Sun", "image": "https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Mặt trời" },
         { "word": "Star", "image": "https://images.pexels.com/photos/735871/pexels-photo-735871.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Ngôi sao" },
         { "word": "Flower", "image": "https://images.pexels.com/photos/542517/pexels-photo-542517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Hoa" },
+        { "word": "Red", "image": "https://images.pexels.com/photos/542517/pexels-photo-542517.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Màu đỏ" },
+        { "word": "Blue", "image": "https://www.iconsdb.com/icons/preview/blue/square-xxl.png", "meaning": "Xanh dương" },
+        { "word": "Green", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh56hpDQUZA3UlKtxYFH5YfBuwon3qjhLNqw&s", "meaning": "Xanh lá cây" },
+        { "word": "Yellow", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxVi3MwfJ5UD0v_-3TdlSLwFwNp3SGxuE3yh5KwsgKC86mX7gOcKYOlk6NN_rlMze6og0&usqp=CAU", "meaning": "Vàng" },
         { "word": "Egg", "image": "https://images.pexels.com/photos/4207654/pexels-photo-4207654.jpeg", "meaning": "Trứng" }
     ]
 }
