@@ -126,13 +126,13 @@
             utterWord.rate = 0.2;
             speechSynthesis.speak(utterWord);
 
-            utterWord.onend = () => {
-                setTimeout(() => {
-                    const utterMeaning = new SpeechSynthesisUtterance(word.meaning);
-                    utterMeaning.lang = 'vi-VN';
-                    speechSynthesis.speak(utterMeaning);
-                }, 1000);
-            };
+            // utterWord.onend = () => {
+            //     setTimeout(() => {
+            //         const utterMeaning = new SpeechSynthesisUtterance(word.meaning);
+            //         utterMeaning.lang = 'vi-VN';
+            //         speechSynthesis.speak(utterMeaning);
+            //     }, 1000);
+            // };
         }
 
         document.getElementById('startButton').addEventListener('click', () => {
