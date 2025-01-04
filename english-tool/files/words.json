@@ -17,6 +17,6 @@
         { "word": "Grapes", "image": "https://images.pexels.com/photos/760281/pexels-photo-760281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Nho" },
         { "word": "Potato", "image": "https://images.pexels.com/photos/144248/potatoes-vegetables-erdfrucht-bio-144248.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Khoai tây" },
         { "word": "Tomato", "image": "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Cà chua" },
-        { "word": "Egg", "image": "https://images.pexels.com/photos/4207654/pexels-photo-4207654.jpeg", "meaning": "Trứng" },
+        { "word": "Egg", "image": "https://images.pexels.com/photos/4207654/pexels-photo-4207654.jpeg", "meaning": "Trứng" }
     ]
 }
