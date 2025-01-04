@@ -1,0 +1,22 @@
+{
+    "words": [
+        { "word": "Apple", "image": "https://images.pexels.com/photos/102104/pexels-photo-102104.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Táo" },
+        { "word": "Ball", "image": "https://images.pexels.com/photos/47730/the-ball-stadion-football-the-pitch-47730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Quả bóng" },
+        { "word": "Cat", "image": "https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Con mèo" },
+        { "word": "Dog", "image": "https://images.pexels.com/photos/220938/pexels-photo-220938.jpeg", "meaning": "Con chó" },
+        { "word": "Elephant", "image": "https://images.pexels.com/photos/66898/elephant-cub-tsavo-kenya-66898.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Con voi" },
+        { "word": "Fish", "image": "https://images.pexels.com/photos/3785630/pexels-photo-3785630.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Con cá" },
+        { "word": "Hat", "image": "https://images.pexels.com/photos/35185/hats-fedora-hat-manufacture-stack.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Mũ" },
+        { "word": "Ice Cream", "image": "https://images.pexels.com/photos/1625235/pexels-photo-1625235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Kem" },
+        { "word": "Lion", "image": "https://images.freeimages.com/images/large-previews/65c/majestic-lion-portrait-0410-5704487.jpg?fmt=webp&h=350", "meaning": "Sư tử" },
+        { "word": "Milk", "image": "https://images.pexels.com/photos/248412/pexels-photo-248412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Sữa" },
+        { "word": "Orange", "image": "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Trái cam" },
+        { "word": "Watermelon", "image": "https://images.pexels.com/photos/161559/background-bitter-breakfast-bright-161559.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Dưa hấu" },
+        { "word": "Baby", "image": "https://images.pexels.com/photos/161709/newborn-baby-feet-basket-161709.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Em bé" },
+        { "word": "Water", "image": "https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Nước" },
+        { "word": "Grapes", "image": "https://images.pexels.com/photos/760281/pexels-photo-760281.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Nho" },
+        { "word": "Potato", "image": "https://images.pexels.com/photos/144248/potatoes-vegetables-erdfrucht-bio-144248.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Khoai tây" },
+        { "word": "Tomato", "image": "https://images.pexels.com/photos/1327838/pexels-photo-1327838.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", "meaning": "Cà chua" },
+        { "word": "Egg", "image": "https://images.pexels.com/photos/4207654/pexels-photo-4207654.jpeg", "meaning": "Trứng" }
+    ]
+}
