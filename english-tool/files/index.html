@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Min's Vocab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .word-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: #f3f3f3;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .word-image {
+            width: 600px;
+            height: 400px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .word-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00796b;
+        }
+        .word-meaning {
+            font-size: 18px;
+            color: #555;
+        }
+        .button {
+            padding: 20px 40px;
+            font-size: 24px;
+            color: #ffffff;
+            background-color: #00796b;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #004d40;
+        }
+        #wordItem {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Min's vocab</h1>
+        <div class="word-item" id="wordItem">
+            <img src="" alt="Word" class="word-image" id="wordImage" />
+            <div class="word-name" id="wordName"></div>
+            <div class="word-meaning" id="wordMeaning"></div>
+        </div>
+        <button class="button" id="startButton">Start</button>
+        <button class="button" id="nextButton" style="display: none;">Next</button>
+    </div>
+
+    <script>
+        let words = [];
+        let currentIndex = -1;
+
+        // Fetch words from word.json
+        fetch('https://rocketeerfly.github.io/english-tool/files/words.json')
+            .then(response => response.json())
+            .then(data => {
+                words = data.words;
+            })
+            .catch(error => console.error('Error loading word data:', error));
+
+        function showRandomWord() {
+            if (words.length === 0) return;
+
+            currentIndex = Math.floor(Math.random() * words.length);
+            const word = words[currentIndex];
+
+            const wordImage = document.getElementById('wordImage');
+            const wordName = document.getElementById('wordName');
+            const wordMeaning = document.getElementById('wordMeaning');
+
+            wordImage.src = word.image;
+            wordImage.alt = word.word;
+            wordName.textContent = word.word;
+            wordMeaning.textContent = word.meaning;
+
+            speakWord(word);
+        }
+
+        function speakWord(word) {
+            const utterWord = new SpeechSynthesisUtterance(word.word);
+            utterWord.lang = 'en-US';
+            utterWord.rate = 0.2;
+            speechSynthesis.speak(utterWord);
+
+            utterWord.onend = () => {
+                const utterMeaning = new SpeechSynthesisUtterance(word.meaning);
+                utterMeaning.lang = 'vi-VN';
+                utterMeaning.rate = 0.8;
+                speechSynthesis.speak(utterMeaning);
+            };
+        }
+
+        document.getElementById('startButton').addEventListener('click', () => {
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'inline-block';
+            document.getElementById('wordItem').style.display = 'flex';
+            showRandomWord();
+        });
+
+        document.getElementById('nextButton').addEventListener('click', showRandomWord);
+
+        document.getElementById('wordImage').addEventListener('click', () => {
+            if (currentIndex === -1) return;
+            speakWord(words[currentIndex]);
+        });
+    </script>
+</body>
+</html>
