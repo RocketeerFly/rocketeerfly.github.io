@@ -11,7 +11,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-        fetch('README.md')
+        fetch('CODE_CONVENTIONS.md')
             .then(response => response.text())
             .then(markdownContent => {
                 const htmlContent = marked.parse(markdownContent);
