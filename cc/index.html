@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RocketeerFly</title>
+  <meta charset="UTF-8">
+  <title>Code Conventions</title>
+  <style>
+    iframe {
+      width: 100%;
+      height: 100vh;
+      border: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>Nextjs</h1>
-    <div id="readme-container">CODE_CONVENTIONS...</div>
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script>
-        fetch('CODE_CONVENTIONS.md')
-            .then(response => response.text())
-            .then(markdownContent => {
-                const htmlContent = marked.parse(markdownContent);
-                document.getElementById('readme-container').innerHTML = htmlContent;
-            })
-            .catch(error => {
-                console.error('Error fetching or parsing README:', error);
-                document.getElementById('readme-container').innerHTML = '<p>Error loading README.</p>';
-            });
-    </script>
+  <iframe src="https://rocketeerfly.github.io/cc/CODE_CONVENTIONS.md"></iframe>
 </body>
 </html>
