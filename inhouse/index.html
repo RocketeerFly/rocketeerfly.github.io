@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your App Download</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Container -->
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl max-w-sm w-full text-center border border-gray-200 dark:border-gray-700">
+
+        <!-- App Logo and Title -->
+        <div class="mb-6">
+            <!-- Replace with your app logo URL. Using a placeholder for demonstration. -->
+            <img src="https://placehold.co/128x128/34d399/ffffff?text=App+Icon" alt="App Logo" class="w-24 h-24 mx-auto mb-4 rounded-3xl shadow-md">
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Your App Title</h1>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">Version 1.0</p>
+        </div>
+
+        <!-- Download Button -->
+        <a href="itms-services://?action=download-manifest&url=https://rocketeerfly.github.io/inhouse/lp.plist" class="inline-block w-full py-3 px-6 text-center text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-xl transition-colors duration-200 ease-in-out shadow-lg">
+            Install App
+        </a>
+
+        <!-- Instructions for User -->
+        <div class="mt-6 text-left text-sm">
+            <h2 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Important Instructions:</h2>
+            <p class="mb-2">1. Tap the "Install App" button above.</p>
+            <p class="mb-2">2. A pop-up will appear asking for confirmation to install. Tap "Install".</p>
+            <p class="mb-2">3. If you see a warning that the developer is "Untrusted," please follow these steps to proceed:</p>
+            <ul class="list-disc pl-5 mt-2 space-y-1 text-gray-700 dark:text-gray-300">
+                <li>Go to <span class="font-bold">Settings > General > VPN & Device Management</span>.</li>
+                <li>Under "Enterprise App," tap on your developer's name.</li>
+                <li>Tap <span class="font-bold">Trust "[Your Developer Name]"</span>.</li>
+                <li>Return to your home screen. The app icon will now be active.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
