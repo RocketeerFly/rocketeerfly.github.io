@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Card Draw - Draw Playing Cards Online | Random Tools</title>
+  <meta name="description" content="Draw random playing cards from a standard 52-card deck. Cards are drawn without replacement with flip animation. Free online card draw tool.">
+  <meta name="keywords" content="random card draw, playing card picker, draw cards online, random card generator, virtual deck of cards">
+  <meta name="theme-color" content="#0d0d0d">
+  <meta property="og:title" content="Random Card Draw - Random Tools">
+  <meta property="og:description" content="Draw random playing cards from a 52-card deck with flip animation. No duplicates until you reset.">
+  <link rel="canonical" href="">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .deck-status { text-align: center; font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 8px; }
+    .deck-bar { height: 4px; background: var(--bg-input); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
+    .deck-bar-fill { height: 100%; background: var(--accent-red); border-radius: 2px; transition: width 0.3s ease; }
+    .card-display { display: flex; justify-content: center; align-items: center; min-height: 220px; margin: 16px 0; perspective: 1000px; }
+    .playing-card { width: 140px; height: 200px; position: relative; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; }
+    .playing-card.flipping { animation: cardFlip 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes cardFlip { 0% { transform: rotateY(0deg) scale(0.9); } 50% { transform: rotateY(90deg) scale(1.05); } 100% { transform: rotateY(0deg) scale(1); } }
+    .card-front, .card-back { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; overflow: hidden; box-shadow: var(--shadow-md); }
+    .card-front { background: #fff; }
+    .card-front img { width: 100%; height: 100%; object-fit: contain; }
+    .card-back { transform: rotateY(180deg); }
+    .card-back img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+    .card-suit-red { color: #d43030; } .card-suit-black { color: #111; }
+    .playing-card.show-back .card-front { display: none; } .playing-card.show-back .card-back { transform: rotateY(0deg); }
+    .drawn-cards { margin: 24px 0; }
+    .drawn-label { font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .drawn-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mini-card { width: 44px; height: 62px; border-radius: 6px; overflow: hidden; box-shadow: var(--shadow-sm); animation: fadeIn 0.3s ease-out; }
+    .mini-card img { width: 100%; height: 100%; object-fit: contain; }
+    .btn-row { display: flex; gap: 8px; }
+    .sound-btn svg { width: 20px; height: 20px; }
+    @media (min-width: 480px) { .playing-card { width: 160px; height: 224px; } .mini-card { width: 48px; height: 66px; } }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Home
+        </a>
+        <button class="btn-icon sound-btn" id="soundToggle" aria-label="Toggle sound">
+          <svg id="soundOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <svg id="soundOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="container">
+        <section class="page-header">
+          <div class="icon-wrapper" style="border-color: rgba(252,76,84,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="2"/>
+              <text x="12" y="15" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--accent-red)" stroke="none">A</text>
+            </svg>
+          </div>
+          <h1>Card Draw</h1>
+          <p>Draw random cards from a 52-card deck</p>
+        </section>
+
+        <!-- Guide -->
+        <div class="guide-section">
+          <button class="guide-toggle" aria-expanded="false" onclick="toggleGuide(this)">
+            How to use
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="guide-body">
+            <h3>Quick Start</h3>
+            <ol>
+              <li>Tap the card or the <strong>Draw Card</strong> button to draw a random card.</li>
+              <li>Cards are drawn <strong>without replacement</strong> &mdash; no duplicates until the deck is empty.</li>
+              <li>Tap the <strong>reset</strong> button to reshuffle a fresh 52-card deck.</li>
+            </ol>
+            <h3>Features</h3>
+            <ul>
+              <li><strong>Deck Progress</strong> &mdash; the bar at the top shows how many cards remain.</li>
+              <li><strong>Drawn Cards</strong> &mdash; all previously drawn cards are displayed below as mini cards.</li>
+              <li><strong>Flip Animation</strong> &mdash; each card reveals with a smooth flip effect.</li>
+              <li><strong>Full Deck</strong> &mdash; standard 52-card deck (4 suits &times; 13 ranks, no jokers).</li>
+            </ul>
+            <div class="tip"><strong>Tip:</strong> Perfect for card games when you don't have a physical deck, or for randomly selecting cards for magic tricks and party games.</div>
+          </div>
+        </div>
+
+        <div class="deck-status" id="deckStatus">52 cards remaining</div>
+        <div class="deck-bar"><div class="deck-bar-fill" id="deckBar" style="width:100%"></div></div>
+
+        <div class="card-display" id="cardDisplay">
+          <div class="playing-card show-back" id="mainCard">
+            <div class="card-front" id="cardFront"></div>
+            <div class="card-back"><img src="assets/card_back_1.png" alt="Card back"></div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary btn-lg btn-block" id="drawBtn">Draw Card</button>
+          <button class="btn btn-secondary btn-lg" id="resetBtn" aria-label="Reset deck">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          </button>
+        </div>
+
+        <div class="drawn-cards" id="drawnSection" style="display:none">
+          <div class="drawn-label">Drawn Cards (<span id="drawnCount">0</span>)</div>
+          <div class="drawn-grid" id="drawnGrid"></div>
+        </div>
+
+        <section class="history-section">
+          <div class="history-header">
+            <h3>Recent Draws</h3>
+            <button class="history-clear" id="clearHistory">Clear</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script>
+    const SUITS = [
+      { name: 'spades', symbol: '♠', color: 'black' },
+      { name: 'hearts', symbol: '♥', color: 'red' },
+      { name: 'diamonds', symbol: '♦', color: 'red' },
+      { name: 'clubs', symbol: '♣', color: 'black' }
+    ];
+    const RANKS = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
+
+    let deck = [], drawnCards = [], isDrawing = false;
+    const mainCard = document.getElementById('mainCard');
+    const cardFront = document.getElementById('cardFront');
+    const drawBtn = document.getElementById('drawBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const deckStatus = document.getElementById('deckStatus');
+    const deckBar = document.getElementById('deckBar');
+    const drawnSection = document.getElementById('drawnSection');
+    const drawnGrid = document.getElementById('drawnGrid');
+    const drawnCount = document.getElementById('drawnCount');
+    const historyList = document.getElementById('historyList');
+    const clearHistory = document.getElementById('clearHistory');
+    const soundToggle = document.getElementById('soundToggle');
+
+    function buildDeck() {
+      deck = [];
+      for (const suit of SUITS) for (const rank of RANKS) deck.push({ rank, suit });
+      for (let i = deck.length - 1; i > 0; i--) { const j = randomInt(0, i); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+    }
+    function cardLabel(c) { return c.rank + c.suit.symbol; }
+    function cardImagePath(card) {
+      const rankMap = { A: 'ace', J: 'jack', Q: 'queen', K: 'king' };
+      const rankStr = rankMap[card.rank] || card.rank;
+      const suffix = ['J','Q','K'].includes(card.rank) ? '2' : '';
+      return `assets/cards/${rankStr}_of_${card.suit.name}${suffix}.png`;
+    }
+    function renderCardFront(card) {
+      cardFront.className = 'card-front';
+      cardFront.innerHTML = `<img src="${cardImagePath(card)}" alt="${card.rank} of ${card.suit.name}">`;
+    }
+    function renderMiniCard(card) {
+      return `<div class="mini-card"><img src="${cardImagePath(card)}" alt="${card.rank} of ${card.suit.name}"></div>`;
+    }
+    function updateDeckUI() {
+      const r = deck.length;
+      deckStatus.textContent = r + ' card' + (r !== 1 ? 's' : '') + ' remaining';
+      deckBar.style.width = ((r / 52) * 100) + '%';
+      drawBtn.disabled = r === 0;
+      drawBtn.textContent = r === 0 ? 'Deck Empty' : 'Draw Card';
+    }
+    function updateDrawnUI() {
+      if (!drawnCards.length) { drawnSection.style.display = 'none'; return; }
+      drawnSection.style.display = ''; drawnCount.textContent = drawnCards.length;
+      drawnGrid.innerHTML = drawnCards.map(c => renderMiniCard(c)).join('');
+    }
+    function drawCard() {
+      if (isDrawing || !deck.length) return;
+      isDrawing = true; drawBtn.disabled = true;
+      Sound.playCardFlip();
+      const card = deck.pop(); drawnCards.push(card); renderCardFront(card);
+      mainCard.classList.remove('show-back', 'flipping'); void mainCard.offsetWidth; mainCard.classList.add('flipping');
+      setTimeout(() => {
+        mainCard.classList.remove('flipping'); isDrawing = false;
+        updateDeckUI(); updateDrawnUI();
+        History.add('card', { card: cardLabel(card), rank: card.rank, suit: card.suit.name, remaining: deck.length, time: Date.now() });
+        updateCardHistory();
+      }, 1000);
+    }
+    function resetDeck() { buildDeck(); drawnCards = []; mainCard.classList.add('show-back'); mainCard.classList.remove('flipping'); updateDeckUI(); updateDrawnUI(); showToast('Deck reset'); }
+    function updateCardHistory() {
+      renderHistory('historyList', 'card', (item) => {
+        const timeStr = new Date(item.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        return `<div class="history-item"><span class="value">${item.card}</span><span class="meta">${52 - item.remaining}/52 drawn &middot; ${timeStr}</span></div>`;
+      });
+    }
+    function updateSoundIcon() {
+      document.getElementById('soundOn').style.display = Sound.enabled ? '' : 'none';
+      document.getElementById('soundOff').style.display = Sound.enabled ? 'none' : '';
+    }
+
+    drawBtn.addEventListener('click', drawCard);
+    resetBtn.addEventListener('click', resetDeck);
+    mainCard.addEventListener('click', () => { if (deck.length > 0) drawCard(); });
+    clearHistory.addEventListener('click', () => { History.clear('card'); updateCardHistory(); showToast('History cleared'); });
+    soundToggle.addEventListener('click', () => { Sound.toggle(); updateSoundIcon(); showToast(Sound.enabled ? 'Sound on' : 'Sound off'); });
+    document.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'BUTTON') { e.preventDefault(); drawCard(); } });
+
+    buildDeck(); updateDeckUI(); updateDrawnUI(); updateCardHistory(); updateSoundIcon();
+  </script>
+</body>
+</html>

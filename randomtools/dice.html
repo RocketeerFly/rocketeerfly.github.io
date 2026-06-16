@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Dice Roller - Roll 3D Dice with Animation | Random Tools</title>
+  <meta name="description" content="Roll 1 to 5 dice with realistic 3D animation. Choose colors, toggle sound effects, and view roll history. Free online dice roller.">
+  <meta name="keywords" content="dice roller, roll dice online, 3D dice, virtual dice, random dice, dice simulator">
+  <meta name="theme-color" content="#0d0d0d">
+  <meta property="og:title" content="Online Dice Roller - Random Tools">
+  <meta property="og:description" content="Roll 1-5 dice with 3D CSS animation, custom colors, and sound effects. Free online.">
+  <link rel="canonical" href="">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .dice-arena { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; padding: 32px 16px; min-height: 200px; align-items: center; perspective: 800px; }
+    .dice-wrapper { width: 72px; height: 72px; perspective: 400px; }
+    .dice-cube { width: 72px; height: 72px; position: relative; transform-style: preserve-3d; transition: transform 0.1s; }
+    .dice-cube.rolling { animation: diceRoll 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .dice-face { position: absolute; width: 72px; height: 72px; border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; padding: 10px; gap: 4px; backface-visibility: hidden; border: 2px solid rgba(255,255,255,0.15); }
+    .dice-face .dot { width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: inset 0 -2px 3px rgba(0,0,0,0.3); }
+    .face-1 { justify-content: center; align-content: center; }
+    .face-2 { justify-content: space-between; align-content: space-between; padding: 14px; }
+    .face-2 .dot:first-child { align-self: flex-start; } .face-2 .dot:last-child { align-self: flex-end; }
+    .face-3 { justify-content: space-between; align-content: space-between; padding: 14px; }
+    .face-3 .dot:nth-child(1) { align-self: flex-start; } .face-3 .dot:nth-child(2) { align-self: center; } .face-3 .dot:nth-child(3) { align-self: flex-end; }
+    .face-4 { display: grid; grid-template-columns: 1fr 1fr; place-items: center; padding: 12px; }
+    .face-5 { display: grid; grid-template-columns: 1fr 1fr; place-items: center; padding: 12px; }
+    .face-5 .dot:nth-child(5) { grid-column: 1 / -1; }
+    .face-6 { display: grid; grid-template-columns: 1fr 1fr; place-items: center; padding: 10px; gap: 2px; }
+    .dice-face.front  { transform: rotateY(0deg) translateZ(36px); }
+    .dice-face.back   { transform: rotateY(180deg) translateZ(36px); }
+    .dice-face.right  { transform: rotateY(90deg) translateZ(36px); }
+    .dice-face.left   { transform: rotateY(-90deg) translateZ(36px); }
+    .dice-face.top    { transform: rotateX(90deg) translateZ(36px); }
+    .dice-face.bottom { transform: rotateX(-90deg) translateZ(36px); }
+    .show-1 { transform: rotateY(0deg) rotateX(0deg); } .show-2 { transform: rotateY(-90deg) rotateX(0deg); }
+    .show-3 { transform: rotateX(-90deg) rotateY(0deg); } .show-4 { transform: rotateX(90deg) rotateY(0deg); }
+    .show-5 { transform: rotateY(90deg) rotateX(0deg); } .show-6 { transform: rotateY(180deg) rotateX(0deg); }
+    @keyframes diceRoll {
+      0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(-60px); }
+      25%  { transform: rotateX(270deg) rotateY(180deg) rotateZ(90deg) translateY(-30px); }
+      50%  { transform: rotateX(540deg) rotateY(360deg) rotateZ(180deg) translateY(-10px); }
+      75%  { transform: rotateX(630deg) rotateY(450deg) rotateZ(220deg) translateY(0px); }
+    }
+    .dice-total { text-align: center; margin-top: 8px; visibility: hidden; opacity: 0; transition: opacity 0.3s ease; }
+    .dice-total.visible { visibility: visible; opacity: 1; }
+    .dice-total .total-num { font-size: 2.5rem; font-weight: 800; font-family: var(--font-mono); color: var(--accent-orange); }
+    .dice-total .total-label { font-size: 0.8125rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; }
+    .dice-values { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+    .dice-values .val { background: var(--bg-secondary); border-radius: 6px; padding: 4px 10px; font-family: var(--font-mono); font-weight: 600; font-size: 0.875rem; }
+    .options-section { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .option-row { display: flex; align-items: center; justify-content: space-between; }
+    .option-row .label { font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .dice-blue { background: #0074b3; } .dice-green { background: #3a9a3e; } .dice-red { background: #d43a3a; }
+    .dice-orange { background: #d4802a; } .dice-white { background: #c8c8c8; }
+    .dice-white .dot { background: #333; box-shadow: inset 0 -2px 3px rgba(0,0,0,0.15); } .dice-purple { background: #7b3fa0; }
+    .sound-btn svg { width: 20px; height: 20px; }
+    .dice-face.face-question { font-size: 2rem; font-weight: 800; color: #fff; font-family: var(--font-mono); display: flex; align-items: center; justify-content: center; opacity: 0.5; }
+    @media (min-width: 480px) {
+      .dice-wrapper { width: 80px; height: 80px; } .dice-cube { width: 80px; height: 80px; }
+      .dice-face { width: 80px; height: 80px; border-radius: 14px; } .dice-face .dot { width: 14px; height: 14px; }
+      .dice-face.front  { transform: rotateY(0deg) translateZ(40px); } .dice-face.back   { transform: rotateY(180deg) translateZ(40px); }
+      .dice-face.right  { transform: rotateY(90deg) translateZ(40px); } .dice-face.left   { transform: rotateY(-90deg) translateZ(40px); }
+      .dice-face.top    { transform: rotateX(90deg) translateZ(40px); } .dice-face.bottom { transform: rotateX(-90deg) translateZ(40px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Home
+        </a>
+        <button class="btn-icon sound-btn" id="soundToggle" aria-label="Toggle sound">
+          <svg id="soundOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <svg id="soundOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="container">
+        <section class="page-header">
+          <div class="icon-wrapper" style="border-color: rgba(0,162,232,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="3"/>
+              <circle cx="8" cy="8" r="1.5" fill="var(--accent-blue)"/><circle cx="16" cy="8" r="1.5" fill="var(--accent-blue)"/>
+              <circle cx="8" cy="16" r="1.5" fill="var(--accent-blue)"/><circle cx="16" cy="16" r="1.5" fill="var(--accent-blue)"/>
+            </svg>
+          </div>
+          <h1>Dice Roller</h1>
+          <p>Roll up to 5 dice with 3D animation</p>
+        </section>
+
+        <!-- Guide -->
+        <div class="guide-section">
+          <button class="guide-toggle" aria-expanded="false" onclick="toggleGuide(this)">
+            How to use
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="guide-body">
+            <h3>Quick Start</h3>
+            <ol>
+              <li>Choose how many dice to roll (1–5) using the chips below.</li>
+              <li>Pick a dice color from the color palette.</li>
+              <li>Tap <strong>Roll Dice</strong> or press <kbd>Space</kbd>/<kbd>Enter</kbd> to roll.</li>
+            </ol>
+            <h3>Features</h3>
+            <ul>
+              <li><strong>3D Animation</strong> &mdash; dice tumble with realistic CSS 3D transforms.</li>
+              <li><strong>Sound Effects</strong> &mdash; toggle the speaker icon in the top-right to mute/unmute.</li>
+              <li><strong>Total &amp; Breakdown</strong> &mdash; see the sum and individual values after each roll.</li>
+              <li><strong>History</strong> &mdash; all rolls are saved so you can review past results.</li>
+            </ul>
+            <div class="tip"><strong>Tip:</strong> Great for board games, tabletop RPGs, or settling decisions with a dice roll.</div>
+          </div>
+        </div>
+
+        <div class="dice-arena" id="diceArena"></div>
+
+        <div class="dice-total" id="diceTotal">
+          <div class="total-num" id="totalNum">0</div>
+          <div class="dice-values" id="diceValues"></div>
+          <div class="total-label">Total</div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg mt-24" id="rollBtn">Roll Dice</button>
+
+        <div class="options-section">
+          <div class="option-row">
+            <span class="label">Number of dice</span>
+            <div class="chip-group" id="diceCountChips">
+              <button class="chip" data-count="1">1</button>
+              <button class="chip active" data-count="2">2</button>
+              <button class="chip" data-count="3">3</button>
+              <button class="chip" data-count="4">4</button>
+              <button class="chip" data-count="5">5</button>
+            </div>
+          </div>
+          <div class="option-row">
+            <span class="label">Color</span>
+            <div class="color-dots" id="colorDots">
+              <div class="color-dot active" data-color="blue" style="background:#0074b3"></div>
+              <div class="color-dot" data-color="green" style="background:#3a9a3e"></div>
+              <div class="color-dot" data-color="red" style="background:#d43a3a"></div>
+              <div class="color-dot" data-color="orange" style="background:#d4802a"></div>
+              <div class="color-dot" data-color="white" style="background:#c8c8c8"></div>
+              <div class="color-dot" data-color="purple" style="background:#7b3fa0"></div>
+            </div>
+          </div>
+        </div>
+
+        <section class="history-section">
+          <div class="history-header">
+            <h3>Recent Rolls</h3>
+            <button class="history-clear" id="clearHistory">Clear</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script>
+    const arena = document.getElementById('diceArena');
+    const rollBtn = document.getElementById('rollBtn');
+    const totalEl = document.getElementById('diceTotal');
+    const totalNum = document.getElementById('totalNum');
+    const diceValues = document.getElementById('diceValues');
+    const historyList = document.getElementById('historyList');
+    const clearHistory = document.getElementById('clearHistory');
+    const soundToggle = document.getElementById('soundToggle');
+    const countChips = document.getElementById('diceCountChips');
+    const colorDots = document.getElementById('colorDots');
+
+    let diceCount = Storage.get('dice_count', 2);
+    let diceColor = Storage.get('dice_color', 'blue');
+    let isRolling = false;
+
+    function createDotHTML(n) { return '<div class="dot"></div>'.repeat(n); }
+    function createDiceFace(num, position) { return `<div class="dice-face face-${num} ${position} dice-${diceColor}">${createDotHTML(num)}</div>`; }
+    function createDice() {
+      return `<div class="dice-wrapper"><div class="dice-cube show-1">${createDiceFace(1,'front')}${createDiceFace(6,'back')}${createDiceFace(2,'right')}${createDiceFace(5,'left')}${createDiceFace(3,'top')}${createDiceFace(4,'bottom')}</div></div>`;
+    }
+    function createInitialDice() {
+      return `<div class="dice-wrapper"><div class="dice-cube show-1"><div class="dice-face face-question front dice-${diceColor}">?</div>${createDiceFace(6,'back')}${createDiceFace(2,'right')}${createDiceFace(5,'left')}${createDiceFace(3,'top')}${createDiceFace(4,'bottom')}</div></div>`;
+    }
+    function renderDice(initial) { arena.innerHTML = ''; const fn = initial ? createInitialDice : createDice; for (let i = 0; i < diceCount; i++) arena.innerHTML += fn(); totalEl.classList.remove('visible'); }
+
+    function roll() {
+      if (isRolling) return;
+      isRolling = true; rollBtn.disabled = true;
+      renderDice(false);
+      Sound.playDiceRoll();
+      const cubes = arena.querySelectorAll('.dice-cube');
+      const results = [];
+      cubes.forEach((cube, i) => {
+        cube.className = 'dice-cube rolling'; cube.style.animationDelay = (i * 0.1) + 's';
+        const val = randomInt(1, 6); results.push(val);
+        setTimeout(() => {
+          cube.classList.remove('rolling'); cube.className = 'dice-cube show-' + val; cube.style.animation = '';
+          if (i === cubes.length - 1) {
+            const total = results.reduce((a, b) => a + b, 0);
+            totalNum.textContent = total;
+            diceValues.innerHTML = results.map(v => `<span class="val">${v}</span>`).join('');
+            totalEl.classList.add('visible'); totalNum.classList.remove('animate-pop'); void totalNum.offsetWidth; totalNum.classList.add('animate-pop');
+            isRolling = false; rollBtn.disabled = false;
+            History.add('dice', { values: results, total, count: diceCount, color: diceColor, time: Date.now() });
+            updateHistory();
+          }
+        }, 800 + i * 100);
+      });
+    }
+
+    function updateHistory() {
+      renderHistory('historyList', 'dice', (item) => {
+        const timeStr = new Date(item.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        return `<div class="history-item"><span class="value">${item.total}</span><span class="meta">[${item.values.join(', ')}] &middot; ${timeStr}</span></div>`;
+      });
+    }
+
+    function setActiveChip(container, value, dataAttr) {
+      container.querySelectorAll('[data-' + dataAttr + ']').forEach(el => el.classList.toggle('active', el.dataset[dataAttr] === String(value)));
+    }
+    function updateSoundIcon() {
+      document.getElementById('soundOn').style.display = Sound.enabled ? '' : 'none';
+      document.getElementById('soundOff').style.display = Sound.enabled ? 'none' : '';
+    }
+
+    countChips.addEventListener('click', (e) => { const c = e.target.closest('[data-count]'); if (!c) return; diceCount = parseInt(c.dataset.count); Storage.set('dice_count', diceCount); setActiveChip(countChips, diceCount, 'count'); renderDice(true); });
+    colorDots.addEventListener('click', (e) => { const d = e.target.closest('[data-color]'); if (!d) return; diceColor = d.dataset.color; Storage.set('dice_color', diceColor); setActiveChip(colorDots, diceColor, 'color'); renderDice(true); });
+    rollBtn.addEventListener('click', roll);
+    clearHistory.addEventListener('click', () => { History.clear('dice'); updateHistory(); showToast('History cleared'); });
+    soundToggle.addEventListener('click', () => { Sound.toggle(); updateSoundIcon(); showToast(Sound.enabled ? 'Sound on' : 'Sound off'); });
+    document.addEventListener('keydown', (e) => { if ((e.key === ' ' || e.key === 'Enter') && document.activeElement.tagName !== 'BUTTON') { e.preventDefault(); roll(); } });
+
+    setActiveChip(countChips, diceCount, 'count'); setActiveChip(colorDots, diceColor, 'color');
+    renderDice(true); updateHistory(); updateSoundIcon();
+  </script>
+</body>
+</html>

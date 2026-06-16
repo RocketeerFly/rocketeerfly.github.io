@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Random Tools - Free Online Randomizer</title>
+  <meta name="description" content="Learn about Random Tools — a free, private, and lightweight collection of online randomizer utilities.">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="canonical" href="">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .about-hero {
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+    .about-hero h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .about-hero p {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .tool-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .tool-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: all var(--transition);
+    }
+    .tool-link:hover {
+      border-color: var(--border-light);
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+    .tool-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 28px 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 20px 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+    }
+    .stat-num {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-orange);
+      font-family: var(--font-mono);
+    }
+    .stat-label {
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+    .contact-card {
+      padding: 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin: 24px 0;
+    }
+    .contact-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .contact-card p {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .contact-card a.email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--accent-orange);
+      transition: all var(--transition);
+    }
+    .contact-card a.email-link:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent-orange);
+    }
+    .contact-card a.email-link svg { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Home
+        </a>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="container">
+
+        <section class="about-hero">
+          <h1>About Random Tools</h1>
+          <p>A free, private, and lightweight collection of randomizer utilities — built for everyday decisions, games, classrooms, and more.</p>
+        </section>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-num">5</div>
+            <div class="stat-label">Tools</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Ads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">0</div>
+            <div class="stat-label">Trackers</div>
+          </div>
+        </div>
+
+        <article class="prose">
+          <h2>What is Random Tools?</h2>
+          <p>Random Tools is a web-based suite of randomization utilities. Whether you need to generate a random number, roll virtual dice, shuffle a list, draw a card from a deck, or flip a coin, we've got you covered.</p>
+          <p>Originally built as a native iOS app, this web version brings the same functionality to every device with a browser — no app install required.</p>
+
+          <h2>Our Tools</h2>
+        </article>
+
+        <div class="tool-links">
+          <a href="number.html" class="tool-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2"><path d="M4 17l6-12"/><path d="M14 17l6-12"/><line x1="2" y1="9" x2="22" y2="9"/><line x1="2" y1="15" x2="22" y2="15"/></svg>
+            Number
+          </a>
+          <a href="dice.html" class="tool-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-blue)" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="3"/><circle cx="8" cy="8" r="1.5" fill="var(--accent-blue)"/><circle cx="16" cy="16" r="1.5" fill="var(--accent-blue)"/></svg>
+            Dice Roller
+          </a>
+          <a href="list.html" class="tool-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="4" cy="6" r="1.5" fill="var(--accent-green)"/><circle cx="4" cy="12" r="1.5" fill="var(--accent-green)"/><circle cx="4" cy="18" r="1.5" fill="var(--accent-green)"/></svg>
+            List Picker
+          </a>
+          <a href="card.html" class="tool-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-red)" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><text x="12" y="15" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--accent-red)" stroke="none">A</text></svg>
+            Card Draw
+          </a>
+          <a href="coin.html" class="tool-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="10" font-weight="bold" fill="var(--accent-purple)" stroke="none">$</text></svg>
+            Coin Flip
+          </a>
+        </div>
+
+        <article class="prose">
+          <h2>How It Works</h2>
+          <p>All randomization is performed in your browser using the <strong>Web Crypto API</strong> (<code>crypto.getRandomValues</code>), which provides cryptographically secure random numbers. This means results are truly unpredictable and unbiased.</p>
+          <p>The entire application is built with pure HTML, CSS, and JavaScript — no frameworks, no build tools, no server required. Pages load instantly and work offline once cached.</p>
+
+          <h2>Privacy First</h2>
+          <p>We take a simple approach to privacy: <strong>don't collect data in the first place.</strong></p>
+          <ul>
+            <li>No cookies or tracking scripts</li>
+            <li>No analytics (no Google Analytics, no Mixpanel, nothing)</li>
+            <li>No server-side data storage</li>
+            <li>No user accounts or login</li>
+            <li>All preferences and history are stored in your browser's localStorage</li>
+          </ul>
+          <p>Read our full <a href="privacy.html">Privacy Policy</a> for details.</p>
+
+          <h2>Technology</h2>
+          <ul>
+            <li><strong>Frontend:</strong> Pure HTML5, CSS3, and vanilla JavaScript</li>
+            <li><strong>Randomness:</strong> Web Crypto API with Math.random() fallback</li>
+            <li><strong>3D Dice:</strong> CSS 3D transforms and animations</li>
+            <li><strong>Sound:</strong> Web Audio API (synthesized, no audio files)</li>
+            <li><strong>Storage:</strong> Browser localStorage for preferences and history</li>
+            <li><strong>Dependencies:</strong> None. Zero external libraries or frameworks.</li>
+          </ul>
+
+          <h2>iOS App</h2>
+          <p>Random Tools is also available as a <strong>native iOS app</strong> on the App Store. The iOS version features 3D dice powered by SceneKit physics, haptic feedback, and native performance. Search for "Random Tools" on the App Store to download.</p>
+        </article>
+
+        <div class="contact-card" id="contact">
+          <h3>Contact &amp; Support</h3>
+          <p>Have a question, found a bug, or want to suggest a feature? We'd love to hear from you.</p>
+          <a href="mailto:support@randomtools.app" class="email-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            support@randomtools.app
+          </a>
+        </div>
+
+        <article class="prose">
+          <h2>Legal</h2>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+  <script src="js/shared.js"></script>
+</body>
+</html>

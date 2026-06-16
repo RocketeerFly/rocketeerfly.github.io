@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Number Generator - Generate Random Numbers Online | Random Tools</title>
+  <meta name="description" content="Generate random numbers in any range. Set min and max values, enable no-repeats mode, and view history. Free online random number generator.">
+  <meta name="keywords" content="random number generator, random number, number picker, random integer, online randomizer">
+  <meta name="theme-color" content="#0d0d0d">
+  <meta property="og:title" content="Random Number Generator - Random Tools">
+  <meta property="og:description" content="Generate random numbers in any range with no-repeats mode. Free and instant.">
+  <link rel="canonical" href="">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .result-display { position: relative; overflow: hidden; }
+    .result-display.rolling { animation: pulse-glow 0.6s infinite; }
+    .result-display.rolling .result-number { color: var(--text-secondary); transition: none; }
+    .result-number.revealed { animation: pop 0.3s ease-out; color: var(--accent-orange); }
+    .action-row { display: flex; gap: 8px; margin-top: 16px; }
+    .range-info { text-align: center; font-size: 0.8125rem; color: var(--text-muted); margin-top: 8px; }
+    .controls-section { display: flex; flex-direction: column; gap: 16px; }
+    .sound-btn { position: relative; }
+    .sound-btn svg { width: 20px; height: 20px; }
+    .btn-stop { background: var(--accent-red, #e74c3c) !important; border-color: var(--accent-red, #e74c3c) !important; }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Home
+        </a>
+        <button class="btn-icon sound-btn" id="soundToggle" aria-label="Toggle sound">
+          <svg id="soundOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <svg id="soundOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="container">
+        <section class="page-header">
+          <div class="icon-wrapper" style="border-color: rgba(247,149,19,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 17l6-12"/><path d="M14 17l6-12"/>
+              <line x1="2" y1="9" x2="22" y2="9"/><line x1="2" y1="15" x2="22" y2="15"/>
+            </svg>
+          </div>
+          <h1>Random Number</h1>
+          <p>Generate a random number in your range</p>
+        </section>
+
+        <!-- Guide -->
+        <div class="guide-section">
+          <button class="guide-toggle" aria-expanded="false" onclick="toggleGuide(this)">
+            How to use
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="guide-body">
+            <h3>Quick Start</h3>
+            <ol>
+              <li>Enter a <strong>minimum</strong> and <strong>maximum</strong> value (defaults to 0–100).</li>
+              <li>Tap <strong>Generate</strong> to get a random number in that range.</li>
+              <li>Use <strong>Copy</strong> to copy the result to your clipboard.</li>
+            </ol>
+            <h3>Features</h3>
+            <ul>
+              <li><strong>No Repeats</strong> &mdash; toggle this on to avoid getting the same number twice in a row.</li>
+              <li><strong>History</strong> &mdash; your recent results are saved and shown below. Tap any entry to copy it.</li>
+              <li><strong>Keyboard</strong> &mdash; press <kbd>Space</kbd> or <kbd>Enter</kbd> to generate without clicking.</li>
+            </ul>
+            <div class="tip"><strong>Tip:</strong> Your min/max settings are saved automatically and restored next time you visit.</div>
+          </div>
+        </div>
+
+        <div class="controls-section">
+          <div class="input-row">
+            <div class="input-group">
+              <label for="minVal">Min</label>
+              <input type="number" id="minVal" class="input-field" placeholder="0" inputmode="numeric">
+            </div>
+            <div class="input-group">
+              <label for="maxVal">Max</label>
+              <input type="number" id="maxVal" class="input-field" placeholder="100" inputmode="numeric">
+            </div>
+          </div>
+          <div class="toggle-row">
+            <span>No repeats</span>
+            <label class="toggle"><input type="checkbox" id="noRepeats"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <div class="result-display" id="resultDisplay">
+          <div class="result-number" id="resultNumber">?</div>
+          <div class="result-label">Tap generate to start</div>
+        </div>
+
+        <button class="btn btn-primary btn-block btn-lg" id="generateBtn">Generate</button>
+
+        <div class="action-row">
+          <button class="btn btn-secondary" id="copyBtn" style="flex:1" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+          <button class="btn btn-secondary" id="resetBtn" style="flex:1">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="range-info" id="rangeInfo"></div>
+
+        <section class="history-section" id="historySection">
+          <div class="history-header">
+            <h3>Recent</h3>
+            <button class="history-clear" id="clearHistory">Clear</button>
+          </div>
+          <div class="history-list" id="historyList"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="siteFooter"></footer>
+  </div>
+
+  <script src="js/shared.js"></script>
+  <script>
+    const minInput = document.getElementById('minVal');
+    const maxInput = document.getElementById('maxVal');
+    const noRepeats = document.getElementById('noRepeats');
+    const resultDisplay = document.getElementById('resultDisplay');
+    const resultNumber = document.getElementById('resultNumber');
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const rangeInfo = document.getElementById('rangeInfo');
+    const historyList = document.getElementById('historyList');
+    const clearHistory = document.getElementById('clearHistory');
+    const soundToggle = document.getElementById('soundToggle');
+
+    let currentResult = null;
+    let rolling = false;
+    let rollTimer = null;
+    let recentNumbers = [];
+    const MAX_NO_REPEAT = 100;
+
+    minInput.value = Storage.get('num_min', '');
+    maxInput.value = Storage.get('num_max', '');
+    noRepeats.checked = Storage.get('num_no_repeats', false);
+
+    function getRange() {
+      const min = minInput.value === '' ? 0 : parseInt(minInput.value);
+      const max = maxInput.value === '' ? 100 : parseInt(maxInput.value);
+      return { min: Math.min(min, max), max: Math.max(min, max) };
+    }
+
+    function startRolling() {
+      const { min, max } = getRange();
+      Storage.set('num_min', minInput.value);
+      Storage.set('num_max', maxInput.value);
+      Storage.set('num_no_repeats', noRepeats.checked);
+      rolling = true;
+      generateBtn.textContent = 'Stop';
+      generateBtn.classList.add('btn-stop');
+      resultDisplay.classList.add('rolling');
+      resultNumber.classList.remove('revealed');
+
+      rollTimer = setInterval(() => {
+        resultNumber.textContent = randomInt(min, max);
+      }, 30);
+    }
+
+    function stopRolling() {
+      clearInterval(rollTimer);
+      rollTimer = null;
+      const { min, max } = getRange();
+
+      let finalNum;
+      if (noRepeats.checked && (max - min + 1) > 1) {
+        do { finalNum = randomInt(min, max); } while (recentNumbers.includes(finalNum) && recentNumbers.length < (max - min + 1));
+        recentNumbers.push(finalNum);
+        if (recentNumbers.length > Math.min(MAX_NO_REPEAT, max - min)) recentNumbers.shift();
+      } else {
+        finalNum = randomInt(min, max);
+      }
+
+      resultNumber.textContent = finalNum;
+      resultNumber.classList.add('revealed');
+      resultDisplay.classList.remove('rolling');
+      resultDisplay.querySelector('.result-label').textContent = `Range: ${min} – ${max}`;
+      currentResult = finalNum;
+      copyBtn.disabled = false;
+      rolling = false;
+      generateBtn.textContent = 'Generate';
+      generateBtn.classList.remove('btn-stop');
+      Sound.playClick();
+      History.add('number', { value: finalNum, min, max, time: Date.now() });
+      updateHistory();
+      updateRangeInfo();
+    }
+
+    function generate() {
+      if (rolling) {
+        stopRolling();
+      } else {
+        startRolling();
+      }
+    }
+
+    function updateRangeInfo() {
+      const { min, max } = getRange();
+      rangeInfo.textContent = `${(max - min + 1).toLocaleString()} possible values`;
+    }
+
+    function updateHistory() {
+      renderHistory('historyList', 'number', (item) => {
+        const date = new Date(item.time);
+        const timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        return `<div class="history-item" data-value="${item.value}"><span class="value">${item.value}</span><span class="meta">${item.min}–${item.max} &middot; ${timeStr}</span></div>`;
+      });
+    }
+
+    function updateSoundIcon() {
+      document.getElementById('soundOn').style.display = Sound.enabled ? '' : 'none';
+      document.getElementById('soundOff').style.display = Sound.enabled ? 'none' : '';
+    }
+
+    generateBtn.addEventListener('click', generate);
+    copyBtn.addEventListener('click', () => { if (currentResult !== null) copyToClipboard(String(currentResult)); });
+    resetBtn.addEventListener('click', () => {
+      if (rolling) { clearInterval(rollTimer); rollTimer = null; rolling = false; }
+      generateBtn.textContent = 'Generate'; generateBtn.classList.remove('btn-stop');
+      minInput.value = ''; maxInput.value = ''; noRepeats.checked = false;
+      resultNumber.textContent = '?'; resultNumber.classList.remove('revealed');
+      resultDisplay.classList.remove('rolling');
+      resultDisplay.querySelector('.result-label').textContent = 'Tap generate to start';
+      currentResult = null; copyBtn.disabled = true; recentNumbers = []; rangeInfo.textContent = '';
+      Storage.remove('num_min'); Storage.remove('num_max'); Storage.remove('num_no_repeats');
+    });
+    clearHistory.addEventListener('click', () => { History.clear('number'); updateHistory(); showToast('History cleared'); });
+    historyList.addEventListener('click', (e) => { const item = e.target.closest('.history-item'); if (item) copyToClipboard(item.dataset.value); });
+    soundToggle.addEventListener('click', () => { Sound.toggle(); updateSoundIcon(); showToast(Sound.enabled ? 'Sound on' : 'Sound off'); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && document.activeElement.tagName !== 'INPUT') generate();
+      if (e.key === ' ' && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); generate(); }
+    });
+
+    updateHistory(); updateSoundIcon(); updateRangeInfo();
+  </script>
+</body>
+</html>
