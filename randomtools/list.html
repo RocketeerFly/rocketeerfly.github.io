@@ -9,11 +9,31 @@
   <meta name="theme-color" content="#0d0d0d">
   <meta property="og:title" content="Random List Picker - Random Tools">
   <meta property="og:description" content="Enter items, shuffle them randomly. Pick winners, randomize order, or make random selections. Free online.">
-  <link rel="canonical" href="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://random-tools-f9798.web.app/list.html">
+  <meta property="og:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random List Picker - Random Tools">
+  <meta name="twitter:description" content="Enter items, shuffle them randomly. Pick winners, randomize order, or make random selections. Free online.">
+  <meta name="twitter:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <link rel="canonical" href="https://random-tools-f9798.web.app/list.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Random List Picker",
+    "url": "https://random-tools-f9798.web.app/list.html",
+    "description": "Shuffle and randomize any list of items. Enter names, options, or choices and let the randomizer pick for you.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Random Tools", "url": "https://random-tools-f9798.web.app/" }
+  }
+  </script>
   <style>
     .list-input-wrapper { position: relative; }
     .item-count { position: absolute; right: 12px; bottom: 12px; font-size: 0.75rem; color: var(--text-muted); pointer-events: none; }
@@ -69,13 +89,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="guide-body">
-            <h3>Quick Start</h3>
+            <h2>Quick Start</h2>
             <ol>
               <li>Enter your items in the text box, <strong>one item per line</strong>.</li>
               <li>Tap <strong>Shuffle</strong> to randomize the order.</li>
               <li>The first item in the result is highlighted as the "winner."</li>
             </ol>
-            <h3>Use Cases</h3>
+            <h2>Use Cases</h2>
             <ul>
               <li><strong>Raffle / Giveaway</strong> &mdash; enter participant names and shuffle to pick a winner.</li>
               <li><strong>Team Assignment</strong> &mdash; shuffle students or team members into random groups.</li>
@@ -106,7 +126,7 @@
 
         <div class="result-area" id="resultArea">
           <div class="result-header">
-            <h3>Shuffled Result</h3>
+            <h2>Shuffled Result</h2>
             <button class="btn btn-sm btn-secondary" id="reshuffleBtn">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
               Again
@@ -123,7 +143,7 @@
 
         <section class="history-section">
           <div class="history-header">
-            <h3>Recent</h3>
+            <h2>Recent</h2>
             <button class="history-clear" id="clearHistory">Clear</button>
           </div>
           <div class="history-list" id="historyList"></div>
@@ -203,5 +223,8 @@
 
     updateCount(); updateHistory(); updateSoundIcon();
   </script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
 </body>
 </html>

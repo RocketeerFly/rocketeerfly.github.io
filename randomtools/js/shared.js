@@ -244,7 +244,7 @@ function renderFooter() {
         </svg>
         Random Tools
       </div>
-      <span class="footer-copy">&copy; 2025 Random Tools. All rights reserved.</span>
+      <span class="footer-copy">&copy; 2026 Random Tools. All rights reserved.</span>
     </div>
   </div>`;
 }

@@ -9,11 +9,31 @@
   <meta name="theme-color" content="#0d0d0d">
   <meta property="og:title" content="Random Number Generator - Random Tools">
   <meta property="og:description" content="Generate random numbers in any range with no-repeats mode. Free and instant.">
-  <link rel="canonical" href="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://random-tools-f9798.web.app/number.html">
+  <meta property="og:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Number Generator - Random Tools">
+  <meta name="twitter:description" content="Generate random numbers in any range with no-repeats mode. Free and instant.">
+  <meta name="twitter:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <link rel="canonical" href="https://random-tools-f9798.web.app/number.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Random Number Generator",
+    "url": "https://random-tools-f9798.web.app/number.html",
+    "description": "Generate random numbers in any range. Set min and max values, enable no-repeats mode, and view history.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Random Tools", "url": "https://random-tools-f9798.web.app/" }
+  }
+  </script>
   <style>
     .result-display { position: relative; overflow: hidden; }
     .result-display.rolling { animation: pulse-glow 0.6s infinite; }
@@ -62,13 +82,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="guide-body">
-            <h3>Quick Start</h3>
+            <h2>Quick Start</h2>
             <ol>
               <li>Enter a <strong>minimum</strong> and <strong>maximum</strong> value (defaults to 0–100).</li>
               <li>Tap <strong>Generate</strong> to get a random number in that range.</li>
               <li>Use <strong>Copy</strong> to copy the result to your clipboard.</li>
             </ol>
-            <h3>Features</h3>
+            <h2>Features</h2>
             <ul>
               <li><strong>No Repeats</strong> &mdash; toggle this on to avoid getting the same number twice in a row.</li>
               <li><strong>History</strong> &mdash; your recent results are saved and shown below. Tap any entry to copy it.</li>
@@ -117,7 +137,7 @@
 
         <section class="history-section" id="historySection">
           <div class="history-header">
-            <h3>Recent</h3>
+            <h2>Recent</h2>
             <button class="history-clear" id="clearHistory">Clear</button>
           </div>
           <div class="history-list" id="historyList"></div>
@@ -252,5 +272,8 @@
 
     updateHistory(); updateSoundIcon(); updateRangeInfo();
   </script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
 </body>
 </html>

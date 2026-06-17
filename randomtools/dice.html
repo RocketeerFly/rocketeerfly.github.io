@@ -9,11 +9,31 @@
   <meta name="theme-color" content="#0d0d0d">
   <meta property="og:title" content="Online Dice Roller - Random Tools">
   <meta property="og:description" content="Roll 1-5 dice with 3D CSS animation, custom colors, and sound effects. Free online.">
-  <link rel="canonical" href="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://random-tools-f9798.web.app/dice.html">
+  <meta property="og:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Online Dice Roller - Random Tools">
+  <meta name="twitter:description" content="Roll 1-5 dice with 3D CSS animation, custom colors, and sound effects. Free online.">
+  <meta name="twitter:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <link rel="canonical" href="https://random-tools-f9798.web.app/dice.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Online Dice Roller",
+    "url": "https://random-tools-f9798.web.app/dice.html",
+    "description": "Roll 1 to 5 dice with realistic 3D animation. Choose colors, toggle sound effects, and view roll history.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Random Tools", "url": "https://random-tools-f9798.web.app/" }
+  }
+  </script>
   <style>
     .dice-arena { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; padding: 32px 16px; min-height: 200px; align-items: center; perspective: 800px; }
     .dice-wrapper { width: 72px; height: 72px; perspective: 400px; }
@@ -104,13 +124,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="guide-body">
-            <h3>Quick Start</h3>
+            <h2>Quick Start</h2>
             <ol>
               <li>Choose how many dice to roll (1–5) using the chips below.</li>
               <li>Pick a dice color from the color palette.</li>
               <li>Tap <strong>Roll Dice</strong> or press <kbd>Space</kbd>/<kbd>Enter</kbd> to roll.</li>
             </ol>
-            <h3>Features</h3>
+            <h2>Features</h2>
             <ul>
               <li><strong>3D Animation</strong> &mdash; dice tumble with realistic CSS 3D transforms.</li>
               <li><strong>Sound Effects</strong> &mdash; toggle the speaker icon in the top-right to mute/unmute.</li>
@@ -157,7 +177,7 @@
 
         <section class="history-section">
           <div class="history-header">
-            <h3>Recent Rolls</h3>
+            <h2>Recent Rolls</h2>
             <button class="history-clear" id="clearHistory">Clear</button>
           </div>
           <div class="history-list" id="historyList"></div>
@@ -245,5 +265,8 @@
     setActiveChip(countChips, diceCount, 'count'); setActiveChip(colorDots, diceColor, 'color');
     renderDice(true); updateHistory(); updateSoundIcon();
   </script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
 </body>
 </html>

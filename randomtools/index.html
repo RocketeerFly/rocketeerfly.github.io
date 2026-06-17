@@ -10,11 +10,40 @@
   <meta property="og:title" content="Random Tools - Free Online Randomizer">
   <meta property="og:description" content="Generate random numbers, roll 3D dice, shuffle lists, and draw playing cards. Free, fast, no signup.">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="">
+  <meta property="og:url" content="https://random-tools-f9798.web.app/">
+  <meta property="og:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Tools - Free Online Randomizer">
+  <meta name="twitter:description" content="Generate random numbers, roll 3D dice, shuffle lists, and draw playing cards. Free, fast, no signup.">
+  <meta name="twitter:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <link rel="canonical" href="https://random-tools-f9798.web.app/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Random Tools",
+    "url": "https://random-tools-f9798.web.app/",
+    "description": "Free online random tools. Generate random numbers, roll dice, shuffle lists, draw cards, flip coins, and spin wheels.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://random-tools-f9798.web.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Random Tools",
+    "url": "https://random-tools-f9798.web.app/",
+    "logo": "https://random-tools-f9798.web.app/icon-512.svg"
+  }
+  </script>
   <style>
     .hero {
       text-align: center;
@@ -454,12 +483,60 @@
             </svg>
             Random Tools
           </div>
-          <span class="footer-copy">&copy; 2025 Random Tools. All rights reserved.</span>
+          <span class="footer-copy">&copy; 2026 Random Tools. All rights reserved.</span>
         </div>
       </div>
     </footer>
   </div>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are the results truly random?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We use the Web Crypto API (crypto.getRandomValues) when available, which provides cryptographically secure random numbers. This is the same source of randomness used by security applications and is far superior to Math.random()."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data collected or stored on a server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Random Tools runs entirely in your browser. All history and preferences are stored in your browser's localStorage and never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Once the page is loaded, all tools work without an internet connection. There are no server calls, external APIs, or CDN dependencies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use this for giveaways, classrooms, or games?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Random Tools is perfect for picking raffle winners, randomizing student groups, choosing board game turn order, settling debates, and any situation where you need a fair random outcome."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a mobile app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Random Tools is also available as a native iOS app on the App Store with additional features like 3D dice physics. This web version offers the same core functionality and works on any device with a browser."
+        }
+      }
+    ]
+  }
+  </script>
   <script>
     function toggleFaq(btn) {
       const answer = btn.nextElementSibling;
@@ -474,5 +551,8 @@
       }
     }
   </script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
 </body>
 </html>

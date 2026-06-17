@@ -9,11 +9,31 @@
   <meta name="theme-color" content="#0d0d0d">
   <meta property="og:title" content="Random Card Draw - Random Tools">
   <meta property="og:description" content="Draw random playing cards from a 52-card deck with flip animation. No duplicates until you reset.">
-  <link rel="canonical" href="">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://random-tools-f9798.web.app/card.html">
+  <meta property="og:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Card Draw - Random Tools">
+  <meta name="twitter:description" content="Draw random playing cards from a 52-card deck with flip animation. No duplicates until you reset.">
+  <meta name="twitter:image" content="https://random-tools-f9798.web.app/og-image.png">
+  <link rel="canonical" href="https://random-tools-f9798.web.app/card.html">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icon-192.svg">
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Random Card Draw",
+    "url": "https://random-tools-f9798.web.app/card.html",
+    "description": "Draw random playing cards from a standard 52-card deck. Cards are drawn without replacement with flip animation.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": { "@type": "WebSite", "name": "Random Tools", "url": "https://random-tools-f9798.web.app/" }
+  }
+  </script>
   <style>
     .deck-status { text-align: center; font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 8px; }
     .deck-bar { height: 4px; background: var(--bg-input); border-radius: 2px; overflow: hidden; margin-bottom: 24px; }
@@ -74,13 +94,13 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="guide-body">
-            <h3>Quick Start</h3>
+            <h2>Quick Start</h2>
             <ol>
               <li>Tap the card or the <strong>Draw Card</strong> button to draw a random card.</li>
               <li>Cards are drawn <strong>without replacement</strong> &mdash; no duplicates until the deck is empty.</li>
               <li>Tap the <strong>reset</strong> button to reshuffle a fresh 52-card deck.</li>
             </ol>
-            <h3>Features</h3>
+            <h2>Features</h2>
             <ul>
               <li><strong>Deck Progress</strong> &mdash; the bar at the top shows how many cards remain.</li>
               <li><strong>Drawn Cards</strong> &mdash; all previously drawn cards are displayed below as mini cards.</li>
@@ -115,7 +135,7 @@
 
         <section class="history-section">
           <div class="history-header">
-            <h3>Recent Draws</h3>
+            <h2>Recent Draws</h2>
             <button class="history-clear" id="clearHistory">Clear</button>
           </div>
           <div class="history-list" id="historyList"></div>
@@ -215,5 +235,8 @@
 
     buildDeck(); updateDeckUI(); updateDrawnUI(); updateCardHistory(); updateSoundIcon();
   </script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
 </body>
 </html>
