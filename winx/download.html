@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Tải WinX</title>
+  <!--
+    When hosting, add Plus Jakarta Sans (matches the app's own font):
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ground:  #0B1120;
+      --text:    #EEF2FF;
+      --accent:  #E8294C;
+      --muted:   #64748B;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--ground);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: max(env(safe-area-inset-top), 32px) 28px max(env(safe-area-inset-bottom), 32px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background atmosphere: indigo haze top-left, red glow bottom */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% 115%, rgba(232,41,76,0.22) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 15% -5%,  rgba(99,102,241,0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ghost watermark — the aesthetic risk */
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -48%);
+      font-size: clamp(110px, 38vw, 210px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: rgba(238,242,255,0.025);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      z-index: 0;
+    }
+
+    /* Main content card */
+    .content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      margin-bottom: 44px;
+    }
+
+    .logo .x { color: var(--accent); }
+
+    /* Headline */
+    .headline {
+      font-size: clamp(38px, 11vw, 52px);
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      margin-bottom: 18px;
+    }
+
+    .headline em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    /* Subtext */
+    .subtext {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(238,242,255,0.55);
+      margin-bottom: 44px;
+    }
+
+    /* Animated status line */
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: blink 1.8s ease-in-out infinite;
+    }
+
+    .status-label {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1;   transform: scale(1);    }
+      50%       { opacity: 0.3; transform: scale(0.8);  }
+    }
+
+    /* CTA button */
+    .store-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      width: 100%;
+      padding: 19px 28px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 18px;
+      -webkit-tap-highlight-color: transparent;
+      transition: opacity 0.12s ease, transform 0.12s ease;
+    }
+
+    .store-btn:active {
+      opacity: 0.82;
+      transform: scale(0.97);
+    }
+
+    .store-btn svg { flex-shrink: 0; }
+
+    /* Fallback */
+    .fallback {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .fallback a {
+      color: rgba(238,242,255,0.4);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Divider */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(238,242,255,0.08);
+      margin: 36px 0;
+    }
+
+    /* Footer note */
+    .footer-note {
+      font-size: 12px;
+      color: rgba(238,242,255,0.2);
+      letter-spacing: 0.02em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .status-dot { animation: none; }
+      .store-btn  { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="watermark" aria-hidden="true">WinX</div>
+
+  <div class="content">
+    <div class="logo">Win<span class="x">X</span></div>
+
+    <h1 class="headline">Phiên bản mới<br>đã <em>sẵn sàng</em>.</h1>
+
+    <p class="subtext">
+      Ứng dụng của bạn cần cập nhật để tiếp tục sử dụng đầy đủ tính năng.
+      Vui lòng tải phiên bản mới nhất.
+    </p>
+
+    <div class="status">
+      <div class="status-dot"></div>
+      <span class="status-label" id="status-text">Đang mở cửa hàng ứng dụng…</span>
+    </div>
+
+    <button class="store-btn" id="store-btn" type="button">
+      <span id="btn-icon"></span>
+      <span id="btn-label">Tải ngay</span>
+    </button>
+
+    <p class="fallback">
+      Không tự mở? <a href="#" id="fallback-link">Mở bằng trình duyệt</a>
+    </p>
+
+    <div class="divider"></div>
+    <p class="footer-note" id="platform-note">WinX · Masan Group</p>
+  </div>
+
+  <script>
+    (function () {
+      var ua = navigator.userAgent;
+      var isAndroid = /android/i.test(ua);
+      var isIOS    = /iPad|iPhone|iPod/.test(ua);
+
+      var scheme = isAndroid
+        ? 'market://details?id=com.masangroup.membership&hl=vi'
+        : 'itms-apps://apps.apple.com/vn/app/winx/id6742175598';
+
+      var webUrl = isAndroid
+        ? 'https://play.google.com/store/apps/details?id=com.masangroup.membership&hl=vi'
+        : 'https://apps.apple.com/vn/app/winx/id6742175598';
+
+      var storeName = isIOS ? 'App Store' : isAndroid ? 'Google Play' : 'cửa hàng';
+
+      // Platform label
+      document.getElementById('btn-label').textContent =
+        isIOS ? 'Tải trên App Store' : 'Tải trên Google Play';
+
+      document.getElementById('platform-note').textContent =
+        'WinX · Masan Group · ' + (isIOS ? 'iOS' : isAndroid ? 'Android' : 'Mobile');
+
+      // Platform icon (inline SVG — no external requests)
+      var iconHTML = isIOS
+        ? '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>'
+        : '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.18 23.76c.28.16.61.2.95.1l12.14-7.02-2.76-2.76-10.33 9.68zM.49 1.22C.18 1.56 0 2.08 0 2.77v18.45c0 .69.18 1.21.49 1.55l.08.08 10.33-10.33v-.24L.57 1.14l-.08.08zM20.13 9.78l-2.59-1.5-3.08 3.09 3.08 3.08 2.61-1.51c.74-.43.74-1.13-.02-1.56zM3.18.23L15.32 7.25l-2.76 2.76L2.23.33c.28-.16.64-.17.95-.1z"/></svg>';
+
+      document.getElementById('btn-icon').innerHTML = iconHTML;
+
+      // ── Redirect logic ──────────────────────────────────────────
+      var attempted = false;
+
+      function tryOpenStore() {
+        if (attempted) return;
+        attempted = true;
+
+        document.getElementById('status-text').textContent =
+          'Đang chuyển đến ' + storeName + '…';
+
+        // 1st hop: native store scheme (market:// or itms-apps://)
+        window.location.href = scheme;
+
+        // 2nd hop: HTTPS fallback after 1.5 s if native scheme fails
+        setTimeout(function () {
+          document.getElementById('status-text').textContent =
+            'Mở bằng trình duyệt…';
+          window.location.href = webUrl;
+        }, 1500);
+      }
+
+      // Auto-attempt 800 ms after page load (gives the page time to render)
+      setTimeout(tryOpenStore, 800);
+
+      // Manual button — resets `attempted` so a retry is possible
+      document.getElementById('store-btn').addEventListener('click', function (e) {
+        e.preventDefault();
+        attempted = false;
+        tryOpenStore();
+      });
+
+      // Fallback link — goes straight to the web URL
+      document.getElementById('fallback-link').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href = webUrl;
+      });
+    })();
+  </script>
+
+</body>
+</html>
